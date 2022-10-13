@@ -20,7 +20,7 @@ jobs:
 
 
       - name: Install Dependecies
-        run: npm ci --force
+        run: npm ci --legacy-per-deps
 
       - name: Install Storybook
         run: npm run build-storybook
