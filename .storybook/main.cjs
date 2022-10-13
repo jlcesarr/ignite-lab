@@ -13,4 +13,12 @@ module.exports = {
   features: {
     storyStoreV7: true,
   },
+  viteFinal: (config, { configType }) => {
+    console.log({ configType });
+    if (configType === "PRODUCTION") {
+      config.base = "./";
+    }
+
+    return config;
+  },
 };
