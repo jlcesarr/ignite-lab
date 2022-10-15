@@ -19,12 +19,6 @@ function SignIn() {
     password: "",
   });
 
-  console.log(
-    credentials,
-    !credentials.email,
-    !credentials.email || !credentials.password === true
-  );
-
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
