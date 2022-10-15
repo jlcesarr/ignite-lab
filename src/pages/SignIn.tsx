@@ -7,7 +7,8 @@ import { CheckBox } from "../components/Checkbox";
 import { Link } from "../components/Link";
 import { Button } from "../components/Button";
 import { FormEvent, useState } from "react";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
+import { errorAlert, successAlert } from "../components/Alert";
 
 function SignIn() {
   const [isUserSignedIn, setIsUserSignedIn] = useState<boolean>(false);
@@ -30,8 +31,14 @@ function SignIn() {
 
       if (data.success === true) {
         setIsUserSignedIn(true);
+        successAlert(data.message);
       }
-    } catch (error) {}
+    } catch (error: any) {
+      errorAlert(
+        error.response?.data?.message ||
+          "Erro durante a autenticação, tente novamente!"
+      );
+    }
   }
 
   return (
