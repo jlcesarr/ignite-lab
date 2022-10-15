@@ -4,6 +4,8 @@ import { expect } from "@storybook/jest";
 import { SignIn } from "./SignIn";
 import { rest } from "msw";
 
+import { Alert } from "../components/Alert";
+
 interface IAuthenticateUserResponse {
   success: boolean;
   message: string;
@@ -14,6 +16,7 @@ export default {
   component: SignIn,
   args: {},
   argTypes: {},
+
   parameters: {
     msw: {
       handlers: [
@@ -40,11 +43,21 @@ export default {
       ],
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <>
+          <Alert />
+          {Story()}
+        </>
+      );
+    },
+  ],
 } as Meta;
 
 export const Default: StoryObj = {};
 
-export const ValidCredentials: StoryObj = {
+export const AfterAuthentication: StoryObj = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     userEvent.type(
@@ -56,12 +69,14 @@ export const ValidCredentials: StoryObj = {
     userEvent.click(canvas.getByRole("button"));
 
     await waitFor(() => {
-      return expect(canvas.getByText("Login realizado!")).toBeInTheDocument();
+      return expect(
+        canvas.getByText("Usuário autenticado com sucesso!")
+      ).toBeInTheDocument();
     });
   },
 };
 
-export const InvalidCredentials: StoryObj = {
+export const InvalidAuthentication: StoryObj = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     userEvent.type(
@@ -72,6 +87,10 @@ export const InvalidCredentials: StoryObj = {
     userEvent.type(canvas.getByPlaceholderText("**********"), "12345678");
     userEvent.click(canvas.getByRole("button"));
 
-    // need to verify if the error modal is present
+    await waitFor(() => {
+      return expect(
+        canvas.getByText("Credenciais inválidas!")
+      ).toBeInTheDocument();
+    });
   },
 };
