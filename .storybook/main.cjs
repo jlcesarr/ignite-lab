@@ -12,7 +12,9 @@ module.exports = {
   },
   features: {
     storyStoreV7: true,
+    interactionsDebugger: true,
   },
+  staticDirs: ["../public"],
   viteFinal: (config, { configType }) => {
     console.log({ configType });
     if (configType === "PRODUCTION") {
