@@ -8,7 +8,6 @@ import { Link } from "../components/Link";
 import { Button } from "../components/Button";
 import { FormEvent, useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import Swal from "sweetalert2";
 
 function SignIn() {
   const [isUserSignedIn, setIsUserSignedIn] = useState<boolean>(false);
@@ -36,25 +35,9 @@ function SignIn() {
       });
 
       if (data.success === true) {
-        Swal.fire({
-          title: "Sucesso!",
-          text: data.message,
-          background: "#202024",
-          color: "#f1f1f1",
-          icon: data.success === true ? "success" : "error",
-        });
-
         setIsUserSignedIn(true);
       }
-    } catch (error: any) {
-      Swal.fire({
-        title: "Erro!",
-        text: error.response?.data?.message,
-        background: "#202024",
-        color: "#f1f1f1",
-        icon: "error",
-      });
-    }
+    } catch (error) {}
   }
 
   return (
