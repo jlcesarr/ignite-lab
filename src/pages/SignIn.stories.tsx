@@ -1,10 +1,13 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent, waitFor } from "@storybook/testing-library";
+import { BrowserRouter } from "react-router-dom";
 import { expect } from "@storybook/jest";
-import { SignIn } from "./SignIn";
 import { rest } from "msw";
 
 import { Alert } from "../components/Alert";
+import { Container } from "../components/Container";
+import { Header } from "../components/Header";
+import { SignIn } from "./SignIn";
 
 interface IAuthenticateUserResponse {
   success: boolean;
@@ -47,8 +50,13 @@ export default {
     (Story) => {
       return (
         <>
-          <Alert />
-          {Story()}
+          <BrowserRouter>
+            <Container>
+              <Alert />
+              <Header />
+              {Story()}
+            </Container>
+          </BrowserRouter>
         </>
       );
     },
