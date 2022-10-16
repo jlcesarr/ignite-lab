@@ -4,14 +4,18 @@ import { Alert } from "./components/Alert";
 import { Header } from "./components/Header";
 import { FormsFooter } from "./components/FormsFooter";
 import { Container } from "./components/Container";
+import { BrowserRouter } from "react-router-dom";
+import { Routes } from "./Routes";
+
 function App() {
   return (
-    <Container>
-      <Alert />
-      <Header />
-      <SignIn />
-      <FormsFooter />
-    </Container>
+    <BrowserRouter>
+      <Container>
+        <Alert />
+        <Header />
+        <Routes />
+      </Container>
+    </BrowserRouter>
   );
 }
 
