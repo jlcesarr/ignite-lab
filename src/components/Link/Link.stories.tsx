@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Link, LinkProps } from "./Link";
+import { Link, LinkProps } from ".";
 
 export default {
   title: "Components/Link",
