@@ -16,7 +16,6 @@ module.exports = {
   },
   staticDirs: ["../public"],
   viteFinal: (config, { configType }) => {
-    console.log({ configType });
     if (configType === "PRODUCTION") {
       config.base = "./";
     }
