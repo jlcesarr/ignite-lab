@@ -1,6 +1,6 @@
 import { Text } from "../components/Text";
 import { TextInput } from "../components/TextInput";
-import { Envelope, Lock } from "phosphor-react";
+import { EnvelopeSimple, Lock } from "phosphor-react";
 import { CheckBox } from "../components/Checkbox";
 import { Button } from "../components/Button";
 import { FormEvent, useState } from "react";
@@ -9,12 +9,14 @@ import axios from "axios";
 import { FormsFooter } from "../components/FormsFooter";
 import { Link } from "../components/Link";
 
+interface ISignInForm {
+  email: string;
+  password: string;
+}
+
 function SignIn() {
   const [isUserSignedIn, setIsUserSignedIn] = useState<boolean>(false);
-  const [credentials, setCredentials] = useState<{
-    email: string;
-    password: string;
-  }>({
+  const [credentials, setCredentials] = useState<ISignInForm>({
     email: "",
     password: "",
   });
@@ -42,6 +44,10 @@ function SignIn() {
 
   return (
     <>
+      <Text size="lg" className="text-gray-400 mt-1">
+        Faça login e comece a usar!
+      </Text>
+
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-stretch w-full max-w-sm mt-10 gap-4"
@@ -52,7 +58,7 @@ function SignIn() {
           </Text>
           <TextInput.Root>
             <TextInput.Icon>
-              <Envelope />
+              <EnvelopeSimple />
             </TextInput.Icon>
             <TextInput.Input
               type="email"
