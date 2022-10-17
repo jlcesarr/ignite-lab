@@ -8,7 +8,8 @@ function Routes() {
       <Route exact path="/">
         <Redirect to="/login" />
       </Route>
-      <Route exact path="/login" component={SignIn}></Route>
+      <Route exact path="/login" component={SignIn} />
+      <Route exact path="/register" component={Register} />
     </Switch>
   );
 }
