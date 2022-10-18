@@ -10,6 +10,8 @@ import { Link } from "../components/Link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import axios from "axios";
 
+import validators from "../helpers/validators";
+
 interface ISignInForm {
   email: string;
   password: string;
@@ -79,9 +81,8 @@ function SignIn() {
                   required: true,
                   validate: {
                     isValidMail: (value) =>
-                      new RegExp(
-                        /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-                      ).test(value) || "Insira um e-mail válido",
+                      validators.validateEmail(value) ||
+                      "Insira um e-mail válido",
                   },
                 })
               }

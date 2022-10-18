@@ -12,6 +12,8 @@ import { FormsFooter } from "../components/FormsFooter";
 import { Link } from "../components/Link";
 import axios from "axios";
 
+import validators from "../helpers/validators";
+
 interface IResgiterForm {
   name: string;
   email: string;
@@ -96,7 +98,8 @@ function Register() {
                   required: "Digite um nome",
                   validate: {
                     isValidName: (value) =>
-                      value.split(" ")?.length >= 2 || "Insira um nome válido",
+                      validators.validateFieldMinLength(value, 2) ||
+                      "Insira um nome válido",
                   },
                 })
               }
@@ -134,9 +137,8 @@ function Register() {
                   required: "Digite um e-mail",
                   validate: {
                     isValidMail: (value) =>
-                      new RegExp(
-                        /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-                      ).test(value) || "Insira um e-mail válido",
+                      validators.validateEmail(value) ||
+                      "Insira um e-mail válido",
                   },
                 })
               }
