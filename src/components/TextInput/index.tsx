@@ -7,6 +7,7 @@ import {
   useContext,
 } from "react";
 import { Slot } from "@radix-ui/react-slot";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 interface TextInputContextProps {
   onFilled?: any;
@@ -49,14 +50,15 @@ function TextInputIcon({ children }: TextInputIconProps) {
 TextInputIcon.displayName = "TextInput.Icon";
 
 export interface TextInputInputProps
-  extends InputHTMLAttributes<HTMLInputElement> {}
+  extends InputHTMLAttributes<HTMLInputElement> {
+  register?: () => UseFormRegisterReturn<any>;
+}
 
-function TextInputInput(props: TextInputInputProps) {
-  const { onFilled } = useContext(TextInputContext);
+function TextInputInput({ register, ...props }: TextInputInputProps) {
   return (
     <input
       className="bg-transparent flex-1 text-xs text-gray-100 placeholder:text-gray-400 outline-none"
-      onChange={(ev) => onFilled(() => !!ev.target.value)}
+      {...(register && { ...register() })}
       {...props}
     />
   );
