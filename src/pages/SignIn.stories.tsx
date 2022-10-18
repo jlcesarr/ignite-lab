@@ -65,7 +65,8 @@ export default {
 
 export const Default: StoryObj = {};
 
-export const AfterAuthentication: StoryObj = {
+export const SuccessfulRegistration: StoryObj = {
+  name: "Simulate successful authentication",
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     userEvent.type(
@@ -84,7 +85,9 @@ export const AfterAuthentication: StoryObj = {
   },
 };
 
-export const InvalidAuthentication: StoryObj = {
+export const InvalidCredentials: StoryObj = {
+  name: "Simulate authentication attempt with invalid credentials",
+
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     userEvent.type(
@@ -100,5 +103,67 @@ export const InvalidAuthentication: StoryObj = {
         canvas.getByText("Credenciais inválidas!")
       ).toBeInTheDocument();
     });
+  },
+};
+
+export const EmptyFields: StoryObj = {
+  name: "Simulate authentication attempt with empty field(s)",
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const emailInputElement = canvas.getByPlaceholderText(
+      "johndoe@example.com"
+    );
+
+    const passwordInputElement = canvas.getByPlaceholderText("**********");
+
+    const submitButtonElement = canvas.getByRole("button");
+
+    userEvent.click(submitButtonElement);
+
+    await waitFor(() => {
+      return expect(emailInputElement).toHaveFocus();
+    });
+
+    userEvent.type(emailInputElement, "johndoe@example.com");
+
+    userEvent.click(submitButtonElement);
+
+    await waitFor(() => {
+      return expect(passwordInputElement).toHaveFocus();
+    });
+
+    userEvent.type(passwordInputElement, "validpassword");
+    userEvent.clear(emailInputElement);
+
+    await waitFor(() => {
+      return expect(emailInputElement).toHaveFocus();
+    });
+  },
+};
+
+export const NoAPIResponse: StoryObj = {
+  name: "Simulate authentication attempt when the API is possibly down",
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    userEvent.type(
+      canvas.getByPlaceholderText("johndoe@example.com"),
+      "validuser@user.com"
+    );
+
+    userEvent.type(canvas.getByPlaceholderText("**********"), "validpassword");
+    userEvent.click(canvas.getByRole("button"));
+
+    await waitFor(() => {
+      return expect(
+        canvas.getByText("Erro durante a autenticação, tente novamente!")
+      ).toBeInTheDocument();
+    });
+  },
+  parameters: {
+    msw: {
+      handlers: [],
+    },
   },
 };
