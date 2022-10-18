@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+env:
+  # 7 GiB by default on GitHub, setting to 6 GiB
+  # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
+  NODE_OPTIONS: --max-old-space-size=6144
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -18,14 +23,13 @@ jobs:
         with:
           node-version: 16
 
-      - name: Set Node Option
-        run: export NODE_OPTIONS=--max-old-space-size=8192
-
       - name: Install Dependencies
         run: npm ci --legacy-peer-deps
 
       - name: Build Storybook
         run: npm run build-storybook
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
 
       - name: Deploy StoryBook
         run: npm run deploy-storybook -- --ci --existing-output-dir=storybook-static
