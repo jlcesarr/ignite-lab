@@ -2,7 +2,14 @@ import { themes } from "@storybook/theming";
 import "../src/styles/global.css";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 
-initialize({});
+initialize({
+  serviceWorker: {
+    url:
+      process.env.NODE_ENV === "production"
+        ? "/ignite-lab/mockServiceWorker.js"
+        : "/mockServiceWorker.js",
+  },
+});
 
 export const decorators = [mswDecorator];
 
