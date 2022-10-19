@@ -2,7 +2,9 @@ import { themes } from "@storybook/theming";
 import "../src/styles/global.css";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 
-initialize();
+initialize({
+  onUnhandledRequest: "bypass",
+});
 
 export const decorators = [mswDecorator];
 
