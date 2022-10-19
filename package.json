@@ -59,5 +59,6 @@
   },
   "msw": {
     "workerDirectory": "public"
-  }
+  },
+  "homepage": "https://jlcesarr.github.io/ignite-lab"
 }
