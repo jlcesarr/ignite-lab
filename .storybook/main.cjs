@@ -17,7 +17,7 @@ module.exports = {
   staticDirs: ["../public"],
   viteFinal: (config, { configType }) => {
     if (configType === "PRODUCTION") {
-      config.base = "./";
+      config.base = "/ignite-lab/";
     }
 
     return config;
