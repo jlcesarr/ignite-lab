@@ -8,11 +8,7 @@ import { Alert } from "../components/Alert";
 import { Container } from "../components/Container";
 import { Header } from "../components/Header";
 import { SignIn } from "./SignIn";
-
-interface IAuthenticateUserResponse {
-  success: boolean;
-  message: string;
-}
+import mswConfig from "../msw";
 
 export default {
   title: "Pages/Sign In",
@@ -22,28 +18,7 @@ export default {
 
   parameters: {
     msw: {
-      handlers: [
-        rest.post("/sessions", async (req, res, ctx) => {
-          const { email, password } = await req.json();
-
-          if (email === "validuser@user.com" && password == "validpassword") {
-            return res(
-              ctx.json<IAuthenticateUserResponse>({
-                success: true,
-                message: "Usuário autenticado com sucesso!",
-              })
-            );
-          }
-
-          return res(
-            ctx.status(401),
-            ctx.json<IAuthenticateUserResponse>({
-              success: false,
-              message: "Credenciais inválidas!",
-            })
-          );
-        }),
-      ],
+      handlers: [mswConfig.handlers.login],
     },
   },
   decorators: [

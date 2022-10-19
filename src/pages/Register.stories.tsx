@@ -6,26 +6,14 @@ import { Alert } from "../components/Alert";
 import { within, userEvent, waitFor } from "@storybook/testing-library";
 import { Register } from "./Register";
 import { expect } from "@storybook/jest";
-import { rest } from "msw";
+import mswConfig from "../msw";
 
 export default {
   title: "Pages/Register",
   component: Register,
   parameters: {
     msw: {
-      handlers: [
-        rest.post("/register", async (request, response, ctx) => {
-          const { name, email, password, confirmPassword } =
-            await request.json();
-
-          return response(
-            ctx.json({
-              success: true,
-              message: "Cadastro realizado com sucesso!",
-            })
-          );
-        }),
-      ],
+      handlers: [mswConfig.handlers.register],
     },
   },
   decorators: [
