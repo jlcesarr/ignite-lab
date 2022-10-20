@@ -65,6 +65,7 @@ export default {
         password != confirmPassword
       ) {
         return response(
+          ctx.status(400),
           ctx.json<IRegisterResponseBody>({
             success: false,
             message:
