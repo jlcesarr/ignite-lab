@@ -9,6 +9,7 @@ initialize({
         ? "/ignite-lab/mockServiceWorker.js"
         : "/mockServiceWorker.js",
   },
+  onUnhandledRequest: "bypass",
 });
 
 export const decorators = [mswDecorator];
