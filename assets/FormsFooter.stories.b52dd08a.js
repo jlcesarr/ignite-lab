@@ -1,0 +1,2 @@
+import{F as o}from"./index.bf2009c8.js";import{L as r}from"./index.72c0b153.js";import{j as t}from"./jsx-runtime.0e180f0c.js";import"./index.9b36090b.js";import"./iframe.719c0e88.js";import"./extends.946277fc.js";import"./index.bb73c7b2.js";import"./clsx.m.256e9345.js";const F={title:"Components/FormsFooter",component:o,args:{children:t(r,{to:"#",children:"Footer with link"})},argTypes:{children:{table:{disable:!0}}}},c={},d=["Default"];export{c as Default,d as __namedExportsOrder,F as default};
+//# sourceMappingURL=FormsFooter.stories.b52dd08a.js.map

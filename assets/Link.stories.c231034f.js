@@ -1,0 +1,2 @@
+import{L as t}from"./index.72c0b153.js";import"./index.9b36090b.js";import"./iframe.719c0e88.js";import"./extends.946277fc.js";import"./index.bb73c7b2.js";import"./jsx-runtime.0e180f0c.js";import"./clsx.m.256e9345.js";const s={title:"Components/Link",component:t,args:{children:"Link"}},a={},c=["Default"];export{a as Default,c as __namedExportsOrder,s as default};
+//# sourceMappingURL=Link.stories.c231034f.js.map
