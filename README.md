@@ -29,6 +29,6 @@
 
 
 ### Demo:
-[App - Vercel](https://vercel.com/jl-cesar/ignite-lab/HHeBzk1Wrt9Z9SxSZftptKGARDk1)
+[App - Vercel](https://ignite-lab-puce-xi.vercel.app/)
 
 [Documentação - GH Pages](https://jlcesarr.github.io/ignite-lab/)
